@@ -1,2 +1,4 @@
-import os
-os.system("lt -p 5000 -s grahamswebsite")
+!npm install -g npm
+!npm audit fix
+!npm install -g localtunnel
+!ltlt -p 5000 -s grahamswebsite
