@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/brython@3/brython_stdlib.js">
-</script>
-</script>
- </head>
- <body onload="brython()">
-
-            <script type="text/python">
-            from browser import document, alert
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.5/brython.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.5/brython_stdlib.js"></script>
+</head>
+<body onload="brython()">
+<script type="text/python" id="fetch-script">
             import numpy
             from pprint import pprint
             import nltk
             nltk.download('stopwords')
+            from browser import document, alert
+
             
             def echo(event):
                 alert(document["zone"].value)
