@@ -65,36 +65,72 @@
     <title>Songs Lyrics</title>
 </head>
 <body onload="brython()">
-    <h1>Get Songs Lyrics</h1>
+    <h1>Brain Games Final Project</h1>
+import numpy
+from pprint import pprint
+import nltk
+nltk.download('stopwords')
+try:
+  from Questgen import main
+except:
+  !pip install git+https://github.com/ramsrigouthamg/Questgen.ai
+  !pip install git+https://github.com/boudinfl/pke.git
+  !python -m nltk.downloader universal_tagset
+  !python -m spacy download en
+  from Questgen import main
+file_exists = exists("/content/s2v_reddit_2015_md.tar.gz")
+if file_exists != True:
+  !wget https://github.com/explosion/sense2vec/releases/download/v1.0.0/s2v_reddit_2015_md.tar.gz
+  !tar -xvf  s2v_reddit_2015_md.tar.gz
+try:
+  import wikipedia
+except:
+  !pip install wikipedia
+  import wikipedia
+import requests
+from bs4 import BeautifulSoup
+import random
+newline = '\n'
 
-    <input type="text" id="artist-input" placeholder="Enter something">
-    <button id="lyrics-btn">Get Lyrics</button>
-    <div id="lyrics" class="card">Click the "get lyrics" button</div>
+#computational code goes past this point
 
-
-    <!-- Ajax call -->
-    <script type="text/python" id="script3">
-        import json
-        from browser import document, ajax
-
-        def on_complete(req):
-            data = json.loads(req.responseText)
-            lyrics = data['lyrics']
-            document['lyrics'].text = lyrics
-
-        def get_lyrics(e):
-            req = ajax.ajax()
-            input_data = document['artist-input'].value.split()
-            artist = input_data[0]
-            title = ' '.join(input_data[1:])
-            url = f'https://api.lyrics.ovh/v1/{artist}/{title}'
-            req.open('GET', url, True)
-            req.bind('complete', on_complete)
-            document['lyrics'].text = 'Loading...'
-            req.send()
-
-        document['lyrics-btn'].bind('click', get_lyrics)
-    </script>
+for x in range(0, 4): 
+    url = requests.get("https://en.wikipedia.org/wiki/Special:Random")
+    soup = BeautifulSoup(url.content, "html.parser")
+    title = soup.find(class_="firstHeading").text
+    try:
+      summary = wikipedia.summary(title)
+    except wikipedia.exceptions.DisambiguationError:
+      continue
+    except wikipedia.exceptions.PageError:
+      continue
+    length = len(summary)
+    if length >= 1000 or length <= 500:
+      continue
+    print(f"Title of the article: {title}. The article is {length} characters long. {newline}Do you want to be quizzed on it? (Y/N) After 1 pass you will lose points.")
+    ans = input("").lower()
+    #print("summary type: ", type(summary))
+    if ans == "y" or ans == "yes":
+        qe = main.BoolQGen()
+        payload = {
+          "input_text": summary
+          }
+        pprint("Text/Reading: " + summary)
+        output = qe.predict_boolq(payload)
+        pprint("Question: " + random.choice(output['Boolean Questions']))
+        
+        #print("raw output: ", output)
+        #print("length of summary :", length)
+        #qg = main.QGen()
+        #output = qg.predict_mcq(payload)
+        #pprint (output)
+    
+    elif ans == "n" or ans == "no":
+        print("Try Again!")
+        continue
+    elif ans == "e" or ans == "explicit":
+        print("Try Again!")
+        continue
 
 </body>
 </html>
