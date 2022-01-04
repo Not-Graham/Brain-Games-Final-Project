@@ -2,19 +2,17 @@
 <head>
 <script src="/brython.js"></script>
 </head>
-<p>This is a paragraph.</p>
 <body onload="brython()">
-<script type="text/python">
-from browser import document
-from browser.widgets.dialog import InfoDialog
+    <input type="text" id="text" placeholder="Enter anything in mind">
+    <span id="output"></span>
+        <script type="text/python" id="script1">
+            from browser import document
 
-def click(ev):
-    InfoDialog("Hello", f"Hello, {document['zone'].value} !")
+            def show_text(e):
+                document['output'].textContent = e.target.value;
 
-# bind event 'click' on button to function echo
-document["echo"].bind("click", click)</script>
-<input id="zone">
-<button id="echo">click !</button>
+            document['text'].bind('input', show_text)
+        </script>
 </body>
- <noscript>Please enable Javascript to view this page correctly.</noscript>
+<noscript>Please enable Javascript to view this page correctly.</noscript>
 </html>
