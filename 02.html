@@ -1,42 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns#">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>Graham's Trivia Website</title>
-    <meta name="title" content="Graham's Trivia Website">
-    <meta name="description" content="This test is for my brain games final prject.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
 
-    <link rel="stylesheet" href="../../../resources/stylesheet.min.css">
-    <script src="../../../resources/ga.js" async></script>
-  </head>
-
-  <body>
-    
-    <header>
-      <h1><a href="../../../" id="home-link">Graham's Trivia Website</a></h1>
-    </header>
-    
-    <div id="content">
-      <div id="exercise" class="content-block">
-        <h2 id="exercise-title" class="center">Graham's Trivia Website</h2>
-        <div id="quiz-result"></div>
-        <div id="quiz-zone" class="clear"></div>
-        <div id="quiz-timer" class="center"></div>
+<section>
+      <div class="file_input_form">
+          <form method= "POST" action = "" enctype="multipart/form-data" accept=".txt">
+              <div class = "form_title"><u>Submit your file here!</u></div><br>
+              <div class = "file_input"><input type="file" name = "txt_file" enctype="multipart/form-data"></div>
+              <div class = "submit_button"><input type="submit" name="submit_form" enctype="multipart/form-data"></div>
+          </form>
       </div>
-    </div>
-    
-    </footer>
-    
-    <script src="/content/pa-driver-tests/resources/easytimer.min.js"></script>
-    <script src="/content/pa-driver-tests/resources/ezquiz.js"></script>
-    <script src="/content/pa-driver-tests/resources/javascript.min.js"></script>
-    <script>EZQuiz.generate({
-      info : 'This test generates random wikipedia article summaries and then gives you an AI-generated question about it',
+</section>
 
-      quiz : [{question:'Come ti chiami', image: '', answers : ['gio','carla','sara','tommaso']},
-{question:'Dove sei nato', image: '', answers : ['genova','milano','torino','venezia']},
-
-      ]
-    });</script>
-  </body>
+</body>
 </html>
