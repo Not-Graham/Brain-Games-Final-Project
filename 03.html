@@ -3,16 +3,34 @@
 <script src="/brython.js"></script>
 </head>
 <body onload="brython()">
-    <input type="text" id="text" placeholder="Enter anything in mind">
-    <span id="output"></span>
-        <script type="text/python" id="script1">
-            from browser import document
+    <h1>Get a joke</h1>
 
-            def show_text(e):
-                document['output'].textContent = e.target.value;
+    <button id="joke-btn">Get Joke</button>
+    <div id="joke" class="card">Click the "get joke" button</div>
 
-            document['text'].bind('input', show_text)
-        </script>
+    <!-- Ajax call -->
+    <script type="text/python" id="script3">
+        from browser import document, ajax
+
+        url = 'https://api.chucknorris.io/jokes/random'
+
+        def on_complete(req):
+            import json
+            data = json.loads(req.responseText)
+            joke = data['value']
+            document['joke'].text = joke
+
+        def get_joke(e):
+            req = ajax.ajax()
+            req.open('GET', url, True)
+            req.bind('complete', on_complete)
+            document['joke'].text = 'Loading...'
+            req.send()
+
+        document['joke-btn'].bind('click', get_joke)
+    </script>
+
 </body>
+    
 <noscript>Please enable Javascript to view this page correctly.</noscript>
 </html>
