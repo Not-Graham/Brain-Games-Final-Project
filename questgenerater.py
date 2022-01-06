@@ -1,4 +1,9 @@
 import numpy
+try:
+  from flask_socketio import SocketIO, emit
+except: 
+  os.system("pip install flask_socketio")
+  from flask_socketio import SocketIO, emit
 from pprint import pprint
 from time import sleep
 import nltk
