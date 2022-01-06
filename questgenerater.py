@@ -24,9 +24,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 newline = '\n'
-
-#computational code goes past this point
-def generate_article+: 
+def generate_article: 
     url = requests.get("https://en.wikipedia.org/wiki/Special:Random")
     soup = BeautifulSoup(url.content, "html.parser")
     title = soup.find(class_="firstHeading").text
